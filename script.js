@@ -21,3 +21,29 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.left = randomX + "px";
   noBtn.style.top = randomY + "px";
 });
+
+const intro = document.getElementById("intro-music");
+const yesTrack = document.getElementById("yes-music");
+
+window.addEventListener("click", function startMusic() {
+  intro.loop = true;
+  intro.volume = 0.7;
+  intro.play();
+  window.removeEventListener("click", startMusic);
+});
+
+yesBtn.addEventListener("click", () => {
+  intro.pause();
+  intro.currentTime = 0;
+
+  yesTrack.volume = 0;
+  yesTrack.loop = true;
+  yesTrack.play();
+
+  let v = 0;
+  const fade = setInterval(() => {
+    v += 0.07;
+    yesTrack.volume = Math.min(v, 1);
+    if (v >= 1) clearInterval(fade);
+  }, 80);
+});
